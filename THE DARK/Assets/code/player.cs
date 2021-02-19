@@ -182,6 +182,52 @@ public class @Player : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""hint"",
+            ""id"": ""7adbaf55-1b8c-46f9-99fc-04910aaa8f32"",
+            ""actions"": [
+                {
+                    ""name"": ""hint"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf8a8aff-373e-42d5-95b2-df4143cc5042"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e845547-f185-493d-9aa2-0e5e80df99a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""26b0f395-497b-4514-9676-63b9e2eb8f17"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""hint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf2f1f7e-5c77-4a2a-94fe-466f56dc4249"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -195,6 +241,10 @@ public class @Player : IInputActionCollection, IDisposable
         // camera
         m_camera = asset.FindActionMap("camera", throwIfNotFound: true);
         m_camera_cammove = m_camera.FindAction("cammove", throwIfNotFound: true);
+        // hint
+        m_hint = asset.FindActionMap("hint", throwIfNotFound: true);
+        m_hint_hint = m_hint.FindAction("hint", throwIfNotFound: true);
+        m_hint_restart = m_hint.FindAction("restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +389,47 @@ public class @Player : IInputActionCollection, IDisposable
         }
     }
     public CameraActions @camera => new CameraActions(this);
+
+    // hint
+    private readonly InputActionMap m_hint;
+    private IHintActions m_HintActionsCallbackInterface;
+    private readonly InputAction m_hint_hint;
+    private readonly InputAction m_hint_restart;
+    public struct HintActions
+    {
+        private @Player m_Wrapper;
+        public HintActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @hint => m_Wrapper.m_hint_hint;
+        public InputAction @restart => m_Wrapper.m_hint_restart;
+        public InputActionMap Get() { return m_Wrapper.m_hint; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(HintActions set) { return set.Get(); }
+        public void SetCallbacks(IHintActions instance)
+        {
+            if (m_Wrapper.m_HintActionsCallbackInterface != null)
+            {
+                @hint.started -= m_Wrapper.m_HintActionsCallbackInterface.OnHint;
+                @hint.performed -= m_Wrapper.m_HintActionsCallbackInterface.OnHint;
+                @hint.canceled -= m_Wrapper.m_HintActionsCallbackInterface.OnHint;
+                @restart.started -= m_Wrapper.m_HintActionsCallbackInterface.OnRestart;
+                @restart.performed -= m_Wrapper.m_HintActionsCallbackInterface.OnRestart;
+                @restart.canceled -= m_Wrapper.m_HintActionsCallbackInterface.OnRestart;
+            }
+            m_Wrapper.m_HintActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @hint.started += instance.OnHint;
+                @hint.performed += instance.OnHint;
+                @hint.canceled += instance.OnHint;
+                @restart.started += instance.OnRestart;
+                @restart.performed += instance.OnRestart;
+                @restart.canceled += instance.OnRestart;
+            }
+        }
+    }
+    public HintActions @hint => new HintActions(this);
     public interface IPlayer_oneActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -350,5 +441,10 @@ public class @Player : IInputActionCollection, IDisposable
     public interface ICameraActions
     {
         void OnCammove(InputAction.CallbackContext context);
+    }
+    public interface IHintActions
+    {
+        void OnHint(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

@@ -13,7 +13,7 @@ public class enabletype : MonoBehaviour
         {
           
             typeObj.SetActive(true);
-            Debug.Log("typeenable_enter");
+            //Debug.Log("typeenable_enter");
         }
 
     }
@@ -24,7 +24,7 @@ public class enabletype : MonoBehaviour
         {
             typeObj.SetActive(false);
 
-            Debug.Log("typeenable_exit");
+            //Debug.Log("typeenable_exit");
         }
     }
 

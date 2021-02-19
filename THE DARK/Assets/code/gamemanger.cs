@@ -9,7 +9,7 @@ public class gamemanger : MonoBehaviour
     Image timebar;
     [SerializeField]
     private float maxtime=5f;
-    float timeleft;
+    public float timeleft;
     public GameObject gameover;
     void Start()
     {

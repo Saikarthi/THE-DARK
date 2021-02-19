@@ -169,6 +169,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "hint",
+            "id": "7adbaf55-1b8c-46f9-99fc-04910aaa8f32",
+            "actions": [
+                {
+                    "name": "hint",
+                    "type": "Button",
+                    "id": "cf8a8aff-373e-42d5-95b2-df4143cc5042",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "restart",
+                    "type": "Button",
+                    "id": "8e845547-f185-493d-9aa2-0e5e80df99a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "26b0f395-497b-4514-9676-63b9e2eb8f17",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "hint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf2f1f7e-5c77-4a2a-94fe-466f56dc4249",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
