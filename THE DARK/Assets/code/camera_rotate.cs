@@ -26,17 +26,17 @@ public class camera_rotate : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
-        positionOfObj01 = new Vector3(-5.0f, 7.2f, 13.1f);
-        rotationOfObj01 = new Vector3( 22.9f,180.1f, 0.0f);
+        positionOfObj01 = new Vector3(-0.8f, 15.8f, 16.3f);
+        rotationOfObj01 = new Vector3(22.0f, 180.1f, 0.0f);
 
-        positionOfObj02 = new Vector3(-21.3f, 7.2f, 0.5f);
-        rotationOfObj02 = new Vector3(22.9f, 90.0f, 0.0f);
+        positionOfObj02 = new Vector3(-22.3f, 14.6f, -1.5f);
+        rotationOfObj02 = new Vector3(28.8f, 89.0f, 359.8f);
 
-        positionOfObj03 = new Vector3(-5.1f, 7.2f, -13.6f);
-        rotationOfObj03 = new Vector3(22.9f, 0.0f, 0.0f);
+        positionOfObj03 = new Vector3(-1.0f, 16.7f, -16.9f);
+        rotationOfObj03 = new Vector3(28.9f, 359.7f, 359.8f);
 
-        positionOfObj04 = new Vector3(11.2f, 7.2f, -0.4f);
-        rotationOfObj04 = new Vector3(22.9f,270.0f, 0.0f);
+        positionOfObj04 = new Vector3(23.6f, 17.8f, -1.6f);
+        rotationOfObj04 = new Vector3(22.4f, 270.1f, 359.8f);
 
         cam_input = new Player();
     }
@@ -57,27 +57,27 @@ public class camera_rotate : MonoBehaviour
         transform.localEulerAngles = rotationOfObj01;
         camnum = 1;
 
-         // to take the value
+        // to take the value
 
-        //positionOfObj01 = cam.transform.localPosition;
-        //rotationOfObj01 = cam.transform.localEulerAngles;
-        //Debug.Log(positionOfObj01);
-        //Debug.Log(rotationOfObj01);
+        positionOfObj01 = cam.transform.localPosition;
+        rotationOfObj01 = cam.transform.localEulerAngles;
+        Debug.Log(positionOfObj01);
+        Debug.Log(rotationOfObj01);
 
     }
 
     void Update()
     {
-        
-        if(cam_input.camera.cammove.triggered)
+
+        if (cam_input.camera.cammove.triggered)
         {
-            if(camnum==1)
+            if (camnum == 1)
             {
                 transform.localPosition = positionOfObj02;
                 transform.localEulerAngles = rotationOfObj02;
                 camnum = 2;
             }
-            else if(camnum == 2)
+            else if (camnum == 2)
             {
                 transform.localPosition = positionOfObj03;
                 transform.localEulerAngles = rotationOfObj03;
