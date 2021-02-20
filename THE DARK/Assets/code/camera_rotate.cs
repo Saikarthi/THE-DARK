@@ -8,7 +8,8 @@ public class camera_rotate : MonoBehaviour
 {
     
     private Camera cam;
-
+    [SerializeField]
+    private GameObject[] g;
 
     private Player cam_input;
 
@@ -53,6 +54,9 @@ public class camera_rotate : MonoBehaviour
     }
     void Start()
     {
+        //for indication
+        g[0].SetActive(true);
+
         transform.localPosition = positionOfObj01;
         transform.localEulerAngles = rotationOfObj01;
         camnum = 1;
@@ -61,8 +65,8 @@ public class camera_rotate : MonoBehaviour
 
         positionOfObj01 = cam.transform.localPosition;
         rotationOfObj01 = cam.transform.localEulerAngles;
-        Debug.Log(positionOfObj01);
-        Debug.Log(rotationOfObj01);
+        //Debug.Log(positionOfObj01);
+        //Debug.Log(rotationOfObj01);
 
     }
 
@@ -76,24 +80,46 @@ public class camera_rotate : MonoBehaviour
                 transform.localPosition = positionOfObj02;
                 transform.localEulerAngles = rotationOfObj02;
                 camnum = 2;
+                g[0].SetActive(false);
+                g[1].SetActive(true);
+                g[2].SetActive(false);
+                g[3].SetActive(false);
+
             }
             else if (camnum == 2)
             {
+
                 transform.localPosition = positionOfObj03;
                 transform.localEulerAngles = rotationOfObj03;
                 camnum = 3;
+                g[2].SetActive(true);
+                g[0].SetActive(false);
+                g[1].SetActive(false);
+                g[3].SetActive(false);
+
             }
             else if (camnum == 3)
             {
                 transform.localPosition = positionOfObj04;
                 transform.localEulerAngles = rotationOfObj04;
                 camnum = 4;
+
+                g[3].SetActive(true);
+                g[2].SetActive(false);
+                g[0].SetActive(false);
+                g[1].SetActive(false);
             }
             else if (camnum == 4)
             {
                 transform.localPosition = positionOfObj01;
                 transform.localEulerAngles = rotationOfObj01;
                 camnum = 1;
+
+                g[0].SetActive(true);
+                g[2].SetActive(false);
+
+                g[3].SetActive(false);
+                g[1].SetActive(false);
             }
         }
     }

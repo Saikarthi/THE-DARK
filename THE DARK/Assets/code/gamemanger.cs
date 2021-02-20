@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class gamemanger : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class gamemanger : MonoBehaviour
     Image timebar;
     [SerializeField]
     private float maxtime=5f;
+    [HideInInspector]
     public float timeleft;
     public GameObject gameover;
     void Start()
@@ -26,7 +28,13 @@ public class gamemanger : MonoBehaviour
         else
         {
             gameover.SetActive(true);
+            Invoke("level1", 3f);
             
         }
+
+    }
+    public void level1()
+    {
+        SceneManager.LoadScene(0);
     }
 }

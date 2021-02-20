@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class typevalid : MonoBehaviour
 {
@@ -45,12 +46,12 @@ public class typevalid : MonoBehaviour
         if(c==code)
         {
             welldone.SetActive(true);
-            Invoke("sec5",2f);
+            Invoke("sec",5f);
         }
         else
         {
             nope.SetActive(true);
-            Invoke("sec5", 2f);
+            Invoke("sec2", 2f);
 
         }
         // Debug.Log(c);
@@ -58,9 +59,13 @@ public class typevalid : MonoBehaviour
 
     }
 
-    public void sec5()
+    public void sec()
     {
         welldone.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void sec2()
+    {
         nope.SetActive(false);
     }
 }

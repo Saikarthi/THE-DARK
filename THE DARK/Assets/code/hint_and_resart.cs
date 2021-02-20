@@ -8,6 +8,9 @@ public class hint_and_resart : MonoBehaviour
     [SerializeField]
     private GameObject h;
     // to get time left
+    [SerializeField]
+    public GameObject w;
+
     public gamemanger g;
     [SerializeField]
     private float TimeForHint;
@@ -33,10 +36,7 @@ public class hint_and_resart : MonoBehaviour
     {
        hint.Disable();
     }
-    void Start()
-    {
 
-    }
        
     // Update is called once per frame
     void Update()
@@ -48,10 +48,26 @@ public class hint_and_resart : MonoBehaviour
             //hint time
             if(TimeForHint > g.timeleft)
             {
-                times = 1;
-                h.SetActive(true);
-                //run after 5f
-                Invoke("sec", 5f);
+                
+                if(w.active == true)
+                {
+                    times = 0;
+                }
+                else
+                {
+                    times = 1;
+                    h.SetActive(true);
+                   
+                    Invoke("sec", 5f);
+                }
+
+
+            }
+            else
+            {
+                w.SetActive(true);
+                Invoke("sec2", 2f);
+
             }
 
         }
@@ -66,6 +82,11 @@ public class hint_and_resart : MonoBehaviour
     void sec()
     {
         h.SetActive(false);
+
+    }
+    void sec2()
+    {
+        w.SetActive(false);
 
     }
 }
