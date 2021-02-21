@@ -10,7 +10,8 @@ public class typevalid : MonoBehaviour
 {
     public TMP_InputField inputfield;
     public GameObject welldone, nope;
-
+    [SerializeField]
+    private int MaxCharLimt;
     private string c;
     [SerializeField]
     private string code;
@@ -21,7 +22,7 @@ public class typevalid : MonoBehaviour
     void Start()
     {
         //limit char 4
-        inputfield.characterLimit = 4;
+        inputfield.characterLimit = MaxCharLimt;
         //limit all to caps
         inputfield.onValidateInput += delegate (string s, int i, char c) { return char.ToUpper(c); };
     }
@@ -62,10 +63,24 @@ public class typevalid : MonoBehaviour
     public void sec()
     {
         welldone.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if(SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            welldone.SetActive(true);
+            Invoke("cr", 30f);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        }
     }
     public void sec2()
     {
         nope.SetActive(false);
+    }
+    public void cr()
+    {
+        SceneManager.LoadScene(0);
+
     }
 }
